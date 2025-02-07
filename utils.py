@@ -7,26 +7,20 @@ from colorama import Fore, Style
 from tqdm import tqdm
 from rich.progress import Progress
 
-def count_php_files(directory):
+def count_files(directory, extension=None):
     count = 0
     for foldername, subfolders, filenames in os.walk(directory):
         for filename in filenames:
-            if filename.endswith(".php"):
+            if extension is None or filename.endswith(extension):
                 count += 1
     return count
 
-def count_files(directory):
-    count = 0
-    for foldername, subfolders, filenames in os.walk(directory):
-        for filename in filenames:
-            count += 1
-    return count
 
 
 
 def scan_files_php(directory, vulnerable_functions, mode="default", remove_prepare=False):
     results = {}
-    total_files = count_php_files(directory)
+    total_files = count_files(directory,".php")
 
     with Progress() as progress:
         task = progress.add_task("[cyan]Scanning files...", total=total_files)
