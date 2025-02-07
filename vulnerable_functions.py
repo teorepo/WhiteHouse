@@ -1,34 +1,14 @@
 def get_vulnerable_functions(language):
     if language == "Python":
         return python_vulnerable_functions
-    elif language == "JavaScript (Node.js)":
-        return javascript_vulnerable_functions
+    elif language == "Node.js":
+        return nodejs_vulnerable_functions
     elif language == "Java":
         return java_vulnerable_functions
     elif language == "C#":
         return csharp_vulnerable_functions
     elif language == "PHP":
         return php_vulnerable_functions
-    elif language == "Ruby":
-        return ruby_vulnerable_functions
-    elif language == "Go":
-        return go_vulnerable_functions
-    elif language == "Rust":
-        return rust_vulnerable_functions
-    elif language == "Swift":
-        return swift_vulnerable_functions
-    elif language == "Kotlin":
-        return kotlin_vulnerable_functions
-    elif language == "Scala":
-        return scala_vulnerable_functions
-    elif language == "Perl":
-        return perl_vulnerable_functions
-    elif language == "TypeScript (Node.js)":
-        return typescript_vulnerable_functions
-    elif language == "C++":
-        return cpp_vulnerable_functions
-    elif language == "Objective-C":
-        return objc_vulnerable_functions
     else:
         return {}
 
@@ -36,31 +16,114 @@ def get_vulnerable_functions(language):
 # Python vulnerable functions
 python_vulnerable_functions = {
     "Open Redirect": [
-        # Add Python open redirect vulnerable functions here
+        "redirect(",  
     ],
-    "SQL Injection": [
-        # Add Python SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Python LFI vulnerable functions here
+    "SQL Injection": [    
+        "executescript(", 
+        "cmd_query(", "cmd_query_iter(", "get_rows(", "cmd_process_result(",
+        "callproc(", "mogrify(",
+        "text(", "select(", "update(", "insert(", "delete(",
+        "RawSQL(",
+        "execute_sql(", 
+        "select(", "sqlmeta(", "selectBy(", "selectOne(",
+        "execute_insert(", "execute_direct(",
+        "execute_values(", "execute_batch(",
+        "query(","scalar(",
+        "execute(", "executemany(",
+       
+],
+
+    "Path Traversal": [
+         "open(", 
+        "remove(", 
+        "rmdir(", 
+        "mkdir(", 
+        "makedirs(", 
+        "lstat(", 
+        "chmod(", 
+        "chown(", 
+        "rename(", 
+        "replace(", 
+        "symlink(", 
+        "unlink(", 
+        "utime(", 
+        "join(", 
+        "realpath(", 
+        "abspath(", 
+        "copy2(", 
+        "move(", 
+        "rmtree(",
     ],
     "Server-Side Request Forgery (SSRF)": [
-        # Add Python SSRF vulnerable functions here
+         "request(", 
+        "get(", 
+        "head(", 
+        "post(", 
+        "put(", 
+        "patch(", 
+        "delete(", 
+        "options(", 
+        "session(", 
+        "Session("
     ],
-    "Remote Code Execution (RCE)": [
-        # Add Python RCE vulnerable functions here
+    "Command Injection": [
+        "system(", 
+        "popen(", 
+        "popen2(", 
+        "popen3(", 
+        "popen4(", 
+        "execl(", 
+        "execle(", 
+        "execlp(", 
+        "execlpe(", 
+        "execv(", 
+        "execve(", 
+        "execvp(", 
+        "execvpe(", 
+        "spawnl(", 
+        "spawnle(", 
+        "spawnlp(", 
+        "spawnlpe(", 
+        "spawnv(", 
+        "spawnve(", 
+        "spawnvp(", 
+        "spawnvpe("
     ],
     "Insecure Deserialization": [
-        # Add Python insecure deserialization vulnerable functions here
+        "loads(",  
+        "load(", 
+        "decode(",  
+        "unserializeData(", 
+        "open(",  
+        "dump("
     ],
     "XML External Entity (XXE)": [
-        # Add Python XXE vulnerable functions here
+       "parse(", 
+        "fromstring(", 
+        "parseString(", 
+        "XML(", 
+        "XMLParser("
     ],
     "Cross-Site Scripting (XSS)": [
         # Add Python XSS vulnerable functions here
     ],
     "Server-Side Template Injection (SSTI)": [
-        # Add Python SSTI vulnerable functions here
+        "render_template(", 
+        "render_template_string(", 
+        "Template(", 
+        "Environment.from_string(", 
+        "Environment.get_template(", 
+        "TemplateResponse("
+        "render_template(", 
+        "get_template(",  # Mako
+        "get_templates(",  # Mako
+        "load(",  # Tornado
+        "template(",  # Bottle
+        "view(",  # Bottle
+        "render(",  # Pyramid
+        "render_to_response(",  # Pyramid
+        "PageTemplate(",  # Chameleon
+        "PageTemplateFile("  # Chameleon
     ],
     "Privilege Escalation": [
         # Add Python privilege escalation vulnerable functions here
@@ -68,33 +131,77 @@ python_vulnerable_functions = {
 }
 
 # JavaScript (Node.js) vulnerable functions
-javascript_vulnerable_functions = {
+nodejs_vulnerable_functions = {
     "Open Redirect": [
-        # Add JavaScript (Node.js) open redirect vulnerable functions here
+        "redirect(",
+        "location(",
+        ],
+     "SQL Injection": [
+        "query(", 
+        "execute(", 
+        "raw(", 
+        "one(", 
+        "many(", 
+        "fetchAll(", 
+        "where(",
+        "native(", 
+        "createQueryBuilder(", 
+        "$queryRaw(", 
+        "$queryRawRaw(", 
+        "exec(" 
     ],
-    "SQL Injection": [
-        # Add JavaScript (Node.js) SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add JavaScript (Node.js) LFI vulnerable functions here
+    "Path Traversal": [
+        "sendFile(",
+        "send(",
+        "sendFile(",
+        "file(",
+        "serve-static(",
+        "express-static(",
+        "express.static(",
+        "koa-static(",
+        "readFile(",
+        "readFileSync(",
+        "writeFile(",
+        "writeFileSync(",
+        "unlink("
     ],
     "Server-Side Request Forgery (SSRF)": [
-        # Add JavaScript (Node.js) SSRF vulnerable functions here
+        "request(",
+        "get(",
+        "post(",
     ],
-    "Remote Code Execution (RCE)": [
-        # Add JavaScript (Node.js) RCE vulnerable functions here
-    ],
+    "Command Injection": [
+    "exec(",
+        "execSync(",
+        "spawn(",
+        "execFile(",
+        "exec(",
+  ],
     "Insecure Deserialization": [
-        # Add JavaScript (Node.js) insecure deserialization vulnerable functions here
+        "parse(",
+        "unserialize(",
+        "parse(",
+        "deserialize(",
+        "session(",
+        "parse(",
+        "populate(",
+        "Model.build(",
+        "Model.create(",
+        "deserializeUser(",
     ],
     "XML External Entity (XXE)": [
-        # Add JavaScript (Node.js) XXE vulnerable functions here
+        "parseXML(",
+        "parseString(",
+        "parse(",
+        "parseXmlString(",
+        "parser(",
     ],
     "Cross-Site Scripting (XSS)": [
         # Add JavaScript (Node.js) XSS vulnerable functions here
     ],
     "Server-Side Template Injection (SSTI)": [
-        # Add JavaScript (Node.js) SSTI vulnerable functions here
+        "render(",
+        "view(",
     ],
     "Privilege Escalation": [
         # Add JavaScript (Node.js) privilege escalation vulnerable functions here
@@ -121,7 +228,7 @@ java_vulnerable_functions  = {
         "unmarshal(", "InvokerTransformer(", "DefaultMessageListenerContainer(", 
         "Interceptor(", "readElement("
     ],
-    "Remote Code Execution (RCE)": [
+    "Command Injection": [
         "exec(", "start(", "parse(", "execute(", "launch(", "executeCommand(", 
         "evaluate(", "me("
     ],
@@ -131,7 +238,7 @@ java_vulnerable_functions  = {
     "Open Redirect": [
         "sendRedirect(", "setRedirectStrategy(", "setDefaultTargetURL("
     ],
-    "Local File Inclusion (LFI)": [
+    "Path Traversal": [
         "getRealPath(", "getFile(", "getInputStream(", "load(", "copyToFile(", 
         "writeStringToFile(", "readFileToString("
     ],
@@ -155,31 +262,96 @@ java_vulnerable_functions  = {
 # C# vulnerable functions
 csharp_vulnerable_functions = {
     "Open Redirect": [
-        # Add C# open redirect vulnerable functions here
+        # Following are vulnerable to open redirects if user input is used unsanitized.
+        "Redirect(",  # System.Web.Mvc.Controller.Redirect
+        "Action(",  # System.Web.Mvc.Controller.Action
+        "RouteUrl("  # System.Web.Mvc.UrlHelper.RouteUrl
     ],
     "SQL Injection": [
-        # Add C# SQL injection vulnerable functions here
+        "CommandText(",  # System.Data.IDbCommand.CommandText - Vulnerable to SQL injection if user input is used unsanitized.
+        "ExecuteScalar(",  # System.Data.IDbCommand.ExecuteScalar - Vulnerable to SQL injection if user input is used unsanitized.
+        "ExecuteReader(",  # System.Data.IDbCommand.ExecuteReader - Vulnerable to SQL injection if user input is used unsanitized.
+        "ExecuteNonQuery("  # System.Data.IDbCommand.ExecuteNonQuery - Vulnerable to SQL injection if user input is used unsanitized.
+        "SqlCommand(",
+        "ExecuteSqlRaw(",
+        "ExecuteSqlInterpolated(",
+        "Query(",
+        "FromSql("
     ],
-    "Local File Inclusion (LFI)": [
-        # Add C# LFI vulnerable functions here
+    "Path Traversal": [
+        # Following are vulnerable to path traversal if user input is used unsanitized.
+        "CreateDirectory(",  # System.IO.Directory.CreateDirectory
+        "CreateSubdirectory(",  # System.IO.DirectoryInfo.CreateSubdirectory
+        "Copy(",  # System.IO.File.Copy
+        "Create(",  # System.IO.File.Create
+        "Delete(",  # System.IO.File.Delete
+        "Move(",  # System.IO.File.Move
+        "Open(",  # System.IO.File.Open
+        "Combine(",  # System.IO.Path.Combine
+        "ctor("  # ICSharpCode.SharpZipLib.Zip.FastZip::.ctor
     ],
     "Server-Side Request Forgery (SSRF)": [
-        # Add C# SSRF vulnerable functions here
+        # Following are vulnerable to SSRF if user input is used unsanitized.
+        "Create(",  # System.Net.WebRequest.Create
+        "GetResponse(",  # System.Net.WebRequest.GetResponse
+        "DownloadData(",  # System.Net.WebClient.DownloadData
+        "UploadData(",  # System.Net.WebClient.UploadData
+        "GetAsync(",  # System.Net.Http.HttpClient.GetAsync
+        "PostAsync(",  # System.Net.Http.HttpClient.PostAsync
+        "RestClient(",  # RestClient
+        "DownloadFile(",  # System.Net.WebClient.DownloadFile
+        "DownloadString("  # System.Net.WebClient.DownloadString
     ],
-    "Remote Code Execution (RCE)": [
-        # Add C# RCE vulnerable functions here
+    "Command Injection": [
+        # Following are vulnerable to command injection if user input is used unsanitized.
+        "Start(",  # System.Diagnostics.Process.Start
+        "CreateProcess(",  # Microsoft.Win32.NativeMethods.CreateProcess
+        "CreateProcessAsUser("  # Microsoft.Win32.NativeMethods.CreateProcessAsUser
+        "FileName(",  # System.Diagnostics.ProcessStartInfo.FileName
+        "Arguments(",  # System.Diagnostics.ProcessStartInfo.Arguments
+        "SetPriviliege(",  # System.Security.AccessControl.Privilege.SetPriviliege
+        "AdjustTokenPrivilege("  # Microsoft.Win32.NativeMethods.AdjustTokenPrivilege
+  
     ],
     "Insecure Deserialization": [
-        # Add C# insecure deserialization vulnerable functions here
+        # Following are vulnerable to insecure deserialization if user input is used unsanitized.
+        "Deserialize(",  # System.Runtime.Serialization.Json.DataContractJsonSerializer.Deserialize
+        "ReadObject(",  # System.Runtime.Serialization.Json.DataContractJsonSerializer.ReadObject
+        "DeserializeObject(",  # Newtonsoft.Json.JsonConvert.DeserializeObject
+        "ToObject(",  # fastJSON.JSON.Instance.ToObject
+        "UnPickle(",  # binarySerializer.UnPickle
+        "FsPickler(",  # FsPickler
+        "CreateJsonSerializer(",  # CreateJsonSerializer
+        "NetDataContractSerializer(",  # NetDataContractSerializer
+        "DataContractSerializer(",  # DataContractSerializer
+        "SoapFormatter(",  # SoapFormatter
+        "Jayson(",  # Jayson
+        "DataContractResolver(",  # DataContractResolver
+        "BinaryServerFormatterSinkProvider("  # BinaryServerFormatterSinkProvider
     ],
     "XML External Entity (XXE)": [
-        # Add C# XXE vulnerable functions here
+        "XmlResolver(",  # System.Xml.XmlReaderSettings.XmlResolver - Vulnerable to XXE if user input is used unsanitized.
+        "Load(",  # System.Xml.Linq.XDocument.Load - Vulnerable to XXE if user input is used unsanitized.
+        "LoadXml("  # System.Xml.XmlDocument.LoadXml - Vulnerable to XXE if user input is used unsanitized.
     ],
-    "Cross-Site Scripting (XSS)": [
-        # Add C# XSS vulnerable functions here
+     "Cross-Site Scripting (XSS)": [
+        "Write(",  # System.Web.UI.HtmlTextWriter.Write - Vulnerable to XSS if user input is used unsanitized.
+        "ToString("  # System.Object.ToString - Vulnerable to XSS if user input is used unsanitized.
     ],
     "Server-Side Template Injection (SSTI)": [
-        # Add C# SSTI vulnerable functions here
+        "RenderBody(",  # ASP.NET Razor - RenderBody method
+        "RenderPage(",  # ASP.NET Razor - RenderPage method
+        "RenderSection(",  # ASP.NET Razor - RenderSection method
+        "Parse(",  # DotLiquid - Template.Parse method
+        "Render(",  # DotLiquid - Template.Render method
+        "TransformText(",  # T4 Text Templates - TransformText method
+        "RenderTemplate(",  # Scriban - TemplateContext.RenderTemplate method
+        "Render(" ,  # Scriban - Template.Render method
+        "RenderFromSource(",  # Nustache - Render.StringFromSource method
+        "FormatWith(",  # StringTemplate - ST.FormatWith method
+        "Render(" ,  # Stubble - StubbleBuilder.Render method
+        "ToString(",  # Antlr StringTemplate - Template.ToString method
+        "RenderAsync(",  # Fluid - FluidTemplate.RenderAsync method
     ],
     "Privilege Escalation": [
         # Add C# privilege escalation vulnerable functions here
@@ -211,7 +383,7 @@ php_vulnerable_functions = {
         "sqlite_single_query(",
         "->select("
     ],
-    "Local File Inclusion (LFI)": [
+    "Path Traversal": [
         "require(",
         "require_once(",
         "include(",
@@ -234,13 +406,13 @@ php_vulnerable_functions = {
         "wp_remote_get(",
         "wp_remote_post("
     ],
-    "Remote Code Execution (RCE)": [
+    "Command Injection": [
         "eval(",
         "create_function(",
         "assert(",
         "file_put_contents(",
         "sanitize_file_name(",
-        "php://input",
+        "php:#input",
         "system(",
         "exec(",
         "shell_exec(",
@@ -310,342 +482,5 @@ php_vulnerable_functions = {
     ]
 }
 
-# Ruby vulnerable functions
-ruby_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Ruby open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Ruby SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Ruby LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Ruby SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Ruby RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Ruby insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Ruby XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Ruby XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Ruby SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Ruby privilege escalation vulnerable functions here
-    ]
-}
 
-# Go vulnerable functions
-go_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Go open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Go SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Go LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Go SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Go RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Go insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Go XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Go XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Go SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Go privilege escalation vulnerable functions here
-    ]
-}
 
-# Rust vulnerable functions
-rust_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Rust open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Rust SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Rust LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Rust SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Rust RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Rust insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Rust XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Rust XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Rust SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Rust privilege escalation vulnerable functions here
-    ]
-}
-
-# Swift vulnerable functions
-swift_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Swift open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Swift SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Swift LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Swift SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Swift RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Swift insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Swift XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Swift XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Swift SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Swift privilege escalation vulnerable functions here
-    ]
-}
-
-# Kotlin vulnerable functions
-kotlin_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Kotlin open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Kotlin SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Kotlin LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Kotlin SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Kotlin RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Kotlin insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Kotlin XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Kotlin XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Kotlin SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Kotlin privilege escalation vulnerable functions here
-    ]
-}
-
-# Scala vulnerable functions
-scala_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Scala open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Scala SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Scala LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Scala SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Scala RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Scala insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Scala XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Scala XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Scala SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Scala privilege escalation vulnerable functions here
-    ]
-}
-
-# Perl vulnerable functions
-perl_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Perl open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Perl SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Perl LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Perl SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Perl RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Perl insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Perl XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Perl XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Perl SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Perl privilege escalation vulnerable functions here
-    ]
-}
-
-# TypeScript (Node.js) vulnerable functions
-typescript_vulnerable_functions = {
-    "Open Redirect": [
-        # Add TypeScript (Node.js) open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add TypeScript (Node.js) SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add TypeScript (Node.js) LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add TypeScript (Node.js) SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add TypeScript (Node.js) RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add TypeScript (Node.js) insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add TypeScript (Node.js) XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add TypeScript (Node.js) XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add TypeScript (Node.js) SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add TypeScript (Node.js) privilege escalation vulnerable functions here
-    ]
-}
-
-# C++ vulnerable functions
-cpp_vulnerable_functions = {
-    "Open Redirect": [
-        # Add C++ open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add C++ SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add C++ LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add C++ SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add C++ RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add C++ insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add C++ XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add C++ XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add C++ SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add C++ privilege escalation vulnerable functions here
-    ]
-}
-
-# Objective-C vulnerable functions
-objc_vulnerable_functions = {
-    "Open Redirect": [
-        # Add Objective-C open redirect vulnerable functions here
-    ],
-    "SQL Injection": [
-        # Add Objective-C SQL injection vulnerable functions here
-    ],
-    "Local File Inclusion (LFI)": [
-        # Add Objective-C LFI vulnerable functions here
-    ],
-    "Server-Side Request Forgery (SSRF)": [
-        # Add Objective-C SSRF vulnerable functions here
-    ],
-    "Remote Code Execution (RCE)": [
-        # Add Objective-C RCE vulnerable functions here
-    ],
-    "Insecure Deserialization": [
-        # Add Objective-C insecure deserialization vulnerable functions here
-    ],
-    "XML External Entity (XXE)": [
-        # Add Objective-C XXE vulnerable functions here
-    ],
-    "Cross-Site Scripting (XSS)": [
-        # Add Objective-C XSS vulnerable functions here
-    ],
-    "Server-Side Template Injection (SSTI)": [
-        # Add Objective-C SSTI vulnerable functions here
-    ],
-    "Privilege Escalation": [
-        # Add Objective-C privilege escalation vulnerable functions here
-    ]
-}
