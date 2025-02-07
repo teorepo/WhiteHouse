@@ -1,5 +1,6 @@
 import argparse
 import subprocess
+import os
 from rich.console import Console
 from rich.tree import Tree
 from utils import *
@@ -8,38 +9,60 @@ import colorama
 
 colorama.init()
 console = Console()
+import colorama
+from colorama import Fore, Style
+
+# Initialize colorama
+colorama.init()
+
+def print_cool_name():
+    top_border = Fore.YELLOW + "┌" + "─" * 100 + "┐" + Style.RESET_ALL
+    side_border = Fore.YELLOW + "│" + Style.RESET_ALL + " " * 100 + Fore.YELLOW + "│" + Style.RESET_ALL
+    bottom_border = Fore.YELLOW + "└" + "─" * 100 + "┘" + Style.RESET_ALL
+
+    print(top_border)
+    print(side_border)
+    print(Fore.YELLOW+"│" + " " * 34 + Fore.CYAN + "Welcome to the WhiteHouse!" + Style.RESET_ALL + " " * 40 + Fore.YELLOW+"│")
+    print(side_border)
+    print(side_border)
+    print(Fore.YELLOW+"│" + " " * 32 +Fore.WHITE+ "Created by " + Fore.GREEN + "Malachias Theodoros" + Style.RESET_ALL + " " * 38 + Fore.YELLOW+"│")
+    print(side_border)
+    print(bottom_border)
+    print(r'''
+ __      __     __                 __               __  __                                      
+/\ \  __/\ \   /\ \         __    /\ \__           /\ \/\ \                                     
+\ \ \/\ \ \ \  \ \ \___    /\_\   \ \ ,_\     __   \ \ \_\ \     ___    __  __    ____     __   
+ \ \ \ \ \ \ \  \ \  _ `\  \/\ \   \ \ \/   /'__`\  \ \  _  \   / __`\ /\ \/\ \  /',__\  /'__`\ 
+  \ \ \_/ \_\ \  \ \ \ \ \  \ \ \   \ \ \_ /\  __/   \ \ \ \ \ /\ \L\ \\ \ \_\ \/\__, `\/\  __/ 
+   \ `\___x___/   \ \_\ \_\  \ \_\   \ \__\\ \____\   \ \_\ \_\\ \____/ \ \____/\/\____/\ \____\
+    '\/__//__/     \/_/\/_/   \/_/    \/__/ \/____/    \/_/\/_/ \/___/   \/___/  \/___/  \/____/
+                                                                                                
+                                                                                                  
+    ''')
+    print(bottom_border)
+
+# Call the function to print the cool name
+print_cool_name()
+
 
 LANGUAGES = [
     "Python",
-    "JavaScript (Node.js)",
     "Java",
     "C#",
     "PHP",
-    "Ruby",
-    "Go",
-    "Rust",
-    "Swift",
-    "Kotlin",
-    "Scala",
-    "Perl",
-    "TypeScript (Node.js)",
-    "C++",
-    "Objective-C",
+    "Node.js",
 ]
 
 VULNERABILITIES = {
-    "Open Redirect": "🔄",
     "SQL Injection": "💉",
-    "Local File Inclusion (LFI)": "📁",
+    "Path Traversal": "📁",
     "Server-Side Request Forgery (SSRF)": "🔁",
-    "Remote Code Execution (RCE)": "🚀",
+    "Command Injection": "🚀",
     "Insecure Deserialization": "🧪",
     "XML External Entity (XXE)": "📜",
-    "Cross-Site Scripting (XSS)": "👾",
     "Server-Side Template Injection (SSTI)": "🎯",
-    "Privilege Escalation": "🎢",
+    "Open Redirect": "🔄",
 }
-
 
 def generate_language_tree():
     tree = Tree(":computer: Programming Language Menu", guide_style="bright_blue")
@@ -49,7 +72,6 @@ def generate_language_tree():
 
     return tree
 
-
 def choose_language(last_choice):
     console.print(f"Last choice was: {last_choice.get('language')}")
 
@@ -57,7 +79,6 @@ def choose_language(last_choice):
     last_choice["language"] = language_choice
 
     return language_choice
-
 
 def generate_vulnerability_tree():
     tree = Tree(":fire: Vulnerabilities Menu", guide_style="bright_blue")
@@ -67,7 +88,6 @@ def generate_vulnerability_tree():
 
     return tree
 
-
 def choose_vulnerability(last_choice):
     console.print(f"Last choice was: {last_choice.get('vulnerability')}")
 
@@ -76,7 +96,6 @@ def choose_vulnerability(last_choice):
 
     return vulnerability_choice
 
-
 def scan_files_for_vulnerability(directory, language, vulnerability):
     vulnerable_functions = get_vulnerable_functions(language)
     vulnerability_names = list(VULNERABILITIES.keys())
@@ -84,13 +103,12 @@ def scan_files_for_vulnerability(directory, language, vulnerability):
     vulnerability_name = vulnerability_names[vulnerability_index]
     functions = vulnerable_functions.get(vulnerability_name, [])
 
-    if language=="PHP":
+    if language == "PHP":
         return scan_files_php(directory, functions)
-    elif language=="TypeScript (Node.js)" or language=="JavaScript (Node.js)":
+    elif language == "Node.js":
         return scan_files_nodejs(directory, functions)
     else:
         return scan_files(directory, functions)
-
 
 def generate_files_tree(attack_type, files):
     tree = Tree(f":file_folder: Files possibly vulnerable to {attack_type}", guide_style="bright_blue")
@@ -100,14 +118,12 @@ def generate_files_tree(attack_type, files):
 
     return tree
 
-
 def print_files_menu(attack_type, files, last_choice):
     files_tree = generate_files_tree(attack_type, files)
     console.print(files_tree)
     console.print()
     console.print("Enter the number of the file you want to inspect (or 0 to go back to the vulnerabilities menu):")
     console.print("h. Help", style="yellow")
-
 
 def choose_file(files, last_choice):
     console.print("Last choice was: {}".format(last_choice.get("file")))
@@ -118,15 +134,22 @@ def choose_file(files, last_choice):
 
     return int(file_choice) if file_choice.isdigit() else file_choice
 
+def load_project_in_visual_studio_code(directory):
+    subprocess.run(["code", directory])
 
-def load_file_in_visual_studio_code(file_path, line_number=None):
+
+def load_file_in_visual_studio_code(file_path, line_number=None, project_directory=None):
+    if project_directory:
+        subprocess.run(["code", project_directory])
+
+
     if line_number is not None:
         subprocess.run(["code", "-g", f"{file_path}:{line_number}"])
     else:
         subprocess.run(["code", file_path])
 
 
-def open_in_visual_studio_code(file_path, occurrences, last_choice):
+def open_in_visual_studio_code(file_path, occurrences, last_choice, project_directory):
     occurrence_choice = last_choice.get("occurrence")
 
     if occurrence_choice == "v":
@@ -145,6 +168,9 @@ def open_in_visual_studio_code(file_path, occurrences, last_choice):
     else:
         line_number, _ = occurrences[occurrence_index]
 
+    if project_directory is not None:
+        subprocess.run(["code", project_directory, "--add"])
+
     if last_choice.get("file") is not None:
         load_file_in_visual_studio_code(file_path, line_number)
     elif occurrences:
@@ -161,7 +187,6 @@ def generate_occurrences_tree(file_path, occurrences):
 
     return tree
 
-
 def print_occurrences_menu(file_path, occurrences, last_choice):
     if occurrences:
         occurrences_tree = generate_occurrences_tree(file_path, occurrences)
@@ -175,14 +200,12 @@ def print_occurrences_menu(file_path, occurrences, last_choice):
         console.print("No occurrences found in the selected file.")
         console.print()
 
-
 def choose_occurrence(occurrences, last_choice):
     occurrence_choice = get_input_range(len(occurrences) + 1)
     if occurrence_choice != 'v':
         last_choice["occurrence"] = occurrence_choice
 
     return int(occurrence_choice) if occurrence_choice.isdigit() else occurrence_choice
-
 
 def main():
     parser = argparse.ArgumentParser(description="Scan backend files for potential vulnerabilities")
@@ -265,7 +288,8 @@ def main():
                         print_help_message_occurrences_menu()
                         continue
                     elif occurrence_choice == "v":
-                        open_in_visual_studio_code(file_path, occurrences, last_choice)
+                        project_directory = args.directory if language == "Node.js" else None
+                        open_in_visual_studio_code(file_path, occurrences, last_choice, args.directory)
                         continue
 
                     occurrence_index = occurrence_choice - 1
@@ -279,7 +303,6 @@ def main():
                     start, end = find_function(lines, line_number - 1)
 
                     print_code_details(file_path, line_number, line, lines, start, end)
-
 
 if __name__ == "__main__":
     main()
